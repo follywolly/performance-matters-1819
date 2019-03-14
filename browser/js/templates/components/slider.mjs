@@ -58,7 +58,6 @@ class Slider extends Component {
   build() {
     const v = this.domHandler.virtualize
     const slices = this.helper.chunk(this.state.data, 3)
-    console.log(slices)
     if (this.state.data.length === 0) {
       return v('div', {'class': 'center-text'},
         v('p', {}, 'No paintings found with that name or maker'),

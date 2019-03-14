@@ -9,8 +9,8 @@ class Component {
     this.store = store
     this.props = props
     this.state = {}
-    this.id = this.store.unId
-    this.store.commit('updateID') // increment unique id for every instance of components
+    // this.id = this.store.unId
+    // this.store.commit('updateID') // increment unique id for every instance of components
     this.isLoading = false // default no loading state
   }
   setState(state) {
@@ -38,7 +38,7 @@ class Component {
       this.state = Object.assign({}, this.state, {data})
       node = this.build() // default state
     }
-    node.props['data-id'] = this.id // keep track of unique id per component on html elements
+    node.props['data-id'] = this.constructor.name // keep track of unique id per component on html elements
 
     return node
   }

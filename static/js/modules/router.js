@@ -5,11 +5,11 @@ class Router {
     this.routes = routes
     this.render = new Render()
 
-    if (!window.location.hash) {
-      this.navigate('#'+window.location.pathname)
-    } else {
-      this.navigate(window.location.hash)
-    }
+    // if (!window.location.hash) {
+    //   this.navigate('#'+window.location.pathname)
+    // } else {
+    //   this.navigate(window.location.hash)
+    // }
 
     window.addEventListener('hashchange', () => {
       this.navigate(this.hash())

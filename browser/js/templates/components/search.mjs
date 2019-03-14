@@ -15,6 +15,9 @@ class Search extends Component {
     this.search()
     document.querySelector('#search-form').addEventListener('submit', (e) => e.preventDefault())
   }
+  onSSR() {
+    return this.search
+  }
   search(){
     const input = document.querySelector('#search-input')
     input.addEventListener('input', () => {

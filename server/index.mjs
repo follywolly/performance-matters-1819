@@ -17,15 +17,15 @@ const render = async (req, res, template, param) => {
   const root = new App
   const temp = new template({id: param})
 
-  const body = await toHTML(root.preBuild())
-  console.log(body)
-
-  const parts = body.split('router-view')
+  const body = await toHTML(root.preBuild(), true)
+  const parts = body.html.split('router-view')
   const head = parts[0]
-  const tail = parts[1]
+  const tail = parts[1].trim().substring(2)
 
-  const inner = await toHTML(temp.preBuild())
-  const doc = `${head}router-view">${inner}${tail}`
+  const inner = await toHTML(temp.preBuild(), true)
+
+  const doc = `${head}router-view">${inner.html}${tail}`
+  // const cbs = inner.cbs.join('')
 
   res.set('Content-Type', 'text/html');
   res.end(`
@@ -47,8 +47,6 @@ const render = async (req, res, template, param) => {
 }
 
 app.get('/', (req, res) => {
-  console.log(req.params)
-
   render(req, res, Overview)
 })
 app.get('/paintings/:id', (req, res) => {

@@ -7,7 +7,7 @@ class Slider extends Component {
     this.state = {
       data: []
     }
-    this.loading = true
+    this.loading(true)
   }
   mounted() {
     if (this.state.data.length > 0) {

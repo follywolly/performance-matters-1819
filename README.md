@@ -30,5 +30,7 @@ if (module) {
 }
 ```
 
+some components require callback functions to function properly. How to send callback functions for class references that get created on the server to the client? ???
+
 ## License
 [MIT](LICENSE) @ [Folkert-Jan van der Pol](https://folkertjan.nl)
