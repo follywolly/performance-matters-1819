@@ -36,6 +36,9 @@ class DOM {
     }
   }
   update(comp) {
+    if (typeof document === 'undefined') {
+      return
+    }
     const node = comp.preBuild()
     const el = document.querySelector(`[data-id="${node.props['data-id']}"]`)
 

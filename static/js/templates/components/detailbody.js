@@ -8,17 +8,16 @@ class DetailBody extends Component {
       id: props.id,
       data: {}
     }
-    this.loading = true
+    this.loading(true)
   }
   mounted() {
-    if (this.loading && !this.langChange) {
+    if (this.isLoading && !this.langChange) {
       this.getData(true)
     }
 
     this.store.watch('lang', () => {
       this.langChange = true
-      this.loading = true
-      this.setState({data: null})
+      this.loading(true)
       this.getData(false)
     })
   }
@@ -26,7 +25,7 @@ class DetailBody extends Component {
     const lang = this.store.getState('lang')
     try {
       const data = await request(this.state.id, {'insert': `/${this.state.id}`, lang}, local)
-      this.loading = false
+      this.loading(false)
       this.setState({data})
       this.langChange = false
     } catch (e) {

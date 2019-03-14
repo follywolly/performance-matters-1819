@@ -13,19 +13,19 @@ const app = express()
 
 app.use(express.static(path.join(__dirname + '/static')))
 
-const render = (req, res, template, param) => {
+const render = async (req, res, template, param) => {
   const root = new App
-  const temp = new template(param)
+  const temp = new template({id: param})
 
-  const body = toHTML(
-    root.preBuild()
-  )
-  .split('router-view')
+  const body = await toHTML(root.preBuild())
+  console.log(body)
 
-  const head = body[0]
-  const tail = body[1]
+  const parts = body.split('router-view')
+  const head = parts[0]
+  const tail = parts[1]
 
-  const doc = `${head}router-view">${toHTML(temp.preBuild())}${tail}`
+  const inner = await toHTML(temp.preBuild())
+  const doc = `${head}router-view">${inner}${tail}`
 
   res.set('Content-Type', 'text/html');
   res.end(`

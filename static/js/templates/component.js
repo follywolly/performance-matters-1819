@@ -11,17 +11,31 @@ class Component {
     this.state = {}
     this.id = this.store.unId
     this.store.commit('updateID') // increment unique id for every instance of components
-    this.loading = false // default no loading state
+    this.isLoading = false // default no loading state
   }
   setState(state) {
     this.state = Object.assign({}, this.state, state)
     this.domHandler.update(this) // update the component when state changes
   }
-  preBuild() {
+  loading(bool){
+    this.isLoading = bool
+    if (bool === true) {
+      this.domHandler.update(this)
+    }
+  }
+  serverData() {
+    return new Promise(resolve => resolve(undefined))
+  }
+  preBuild(data = undefined) {
     let node
-    if (this.loading) {
-      node = this.loader() // loading state
+    if (!data) {
+      if (this.isLoading) {
+        node = this.loader() // loading state
+      } else {
+        node = this.build() // default state
+      }
     } else {
+      this.state = Object.assign({}, this.state, {data})
       node = this.build() // default state
     }
     node.props['data-id'] = this.id // keep track of unique id per component on html elements

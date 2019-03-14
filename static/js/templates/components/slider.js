@@ -11,10 +11,10 @@ class Slider extends Component {
   }
   mounted() {
     if (this.state.data.length > 0) {
-      this.loading = false
+      this.loading(false)
     }
 
-    if (this.loading && !this.langChange) {
+    if (this.isLoading && !this.langChange) {
       this.getData(true)
     }
 
@@ -24,12 +24,11 @@ class Slider extends Component {
 
     this.store.watch('lang', () => {
       this.langChange = true
-      this.loading = true
-      this.setState({data: []})
+      this.loading(true)
       this.getData(false)
     }, this.id)
 
-    if (!this.loading) {
+    if (!this.isLoading) {
       this.slider()
     }
   }
@@ -38,7 +37,7 @@ class Slider extends Component {
     try {
       const data = await request('Overview', {'adjacent': '&ps=3', 'lang': language}, local)
       this.store.setState({paintings: data})
-      this.loading = false
+      this.loading(false)
       this.store.commit('filter')
       this.langChange = false
     } catch (e) {

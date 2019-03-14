@@ -2,8 +2,8 @@ import Component from '../component.mjs'
 import LangSwitcher from './atoms/langswitcher.mjs'
 
 class Header extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
   }
   build() {
     const v = this.domHandler.virtualize

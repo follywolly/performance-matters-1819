@@ -9,7 +9,7 @@ class Overview extends Component {
   build() {
     const v = this.domHandler.virtualize
     return v('div', {'class': 'holder'},
-      // v(Search),
+      v(Search),
       v('div', {},
         v(Slider)
       )

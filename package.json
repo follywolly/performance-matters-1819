@@ -19,6 +19,7 @@
   "homepage": "https://github.com/follywolly/performance-matters-1819#readme",
   "dependencies": {
     "express": "^4.16.4",
+    "node-fetch": "^2.3.0",
     "vdom-to-html": "^2.3.1",
     "virtual-dom": "^2.1.1"
   },

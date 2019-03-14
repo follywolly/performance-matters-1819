@@ -1,8 +1,8 @@
 import Component from '../component.mjs'
 
 class Footer extends Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
   }
   build() {
     const v = this.domHandler.virtualize

@@ -1,4 +1,5 @@
 import Component from '../component.mjs'
+import request from '../../modules/data.mjs'
 
 class DetailBody extends Component {
   constructor(props) {
@@ -7,14 +8,43 @@ class DetailBody extends Component {
       id: props.id,
       data: {}
     }
-    this.loading = true
+    this.loading(true)
+  }
+  mounted() {
+    if (this.isLoading && !this.langChange) {
+      this.getData(true)
+    }
+
+    this.store.watch('lang', () => {
+      this.langChange = true
+      this.loading(true)
+      this.getData(false)
+    })
+  }
+  async serverData() {
+    let data = {}
+    try {
+      data = await request(this.state.id, {'insert': `/${this.state.id}`, 'lang': 'en'}, false)
+      this.loading(false)
+    } catch (e) {
+      console.error(e)
+    }
+    return data
+  }
+  async getData(local){
+    const lang = this.store.getState('lang')
+    try {
+      const data = await request(this.state.id, {'insert': `/${this.state.id}`, lang}, local)
+      this.loading(false)
+      this.setState({data})
+      this.langChange = false
+    } catch (e) {
+      console.error(e)
+    }
   }
   build() {
     const v = this.domHandler.virtualize
     const painting = this.state.data
-    if (!painting) {
-      return v('div', {'class': 'painting-body'})
-    }
 
     return v('div', {'class': 'painting-body'},
       v('figure', {},
