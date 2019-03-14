@@ -137,7 +137,7 @@ p.loading {
   flex-direction: column;
   padding: 1rem;
 }
-.painting:hover {
+.painting:not(.detail):hover {
   transform: translateY(-0.5rem);
   box-shadow: 0px 20px 60px -20px rgba(0,0,0,.10);
 }

@@ -36,7 +36,7 @@ class Slider extends Component {
   async getData(local) {
     const language = this.store.getState('lang')
     try {
-      const data = await request('Overview', {'adjacent': '&ps=100', 'lang': language}, local)
+      const data = await request('Overview', {'adjacent': '&ps=3', 'lang': language}, local)
       this.store.setState({paintings: data})
       this.loading = false
       this.store.commit('filter')
@@ -61,7 +61,7 @@ class Slider extends Component {
           return v('div', {'class': i == 0 ? 'painting-group active' : 'painting-group'},
           ...slice.map(painting =>
               v('div', {'class': 'painting'},
-                v('a', {'href': `#/paintings/${painting.number}`},
+                v('a', {'href': `/#/paintings/${painting.number}`},
                   v('figure', {},
                     v('img', {'src': painting.headerSrc}),
                     v('figcaption', {},

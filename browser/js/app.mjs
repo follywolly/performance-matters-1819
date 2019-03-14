@@ -11,9 +11,7 @@ class App extends Component {
     const v = this.domHandler.virtualize
     return v('div', {'class': 'app'},
       v(Header),
-      v('div', {'id': 'router-view'},
-        v(Overview)
-      ),
+      v('div', {'id': 'router-view'}),
       v(Footer)
     )
   }

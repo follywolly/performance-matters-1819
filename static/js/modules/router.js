@@ -1,11 +1,15 @@
 import Render from './render.js'
 
 class Router {
-  constructor(){
-    this.routes = []
+  constructor(routes = []){
+    this.routes = routes
     this.render = new Render()
 
-    if (!window.location.hash) window.location.href = '#/'
+    if (!window.location.hash) {
+      this.navigate('#'+window.location.pathname)
+    } else {
+      this.navigate(window.location.hash)
+    }
 
     window.addEventListener('hashchange', () => {
       this.navigate(this.hash())
@@ -14,6 +18,7 @@ class Router {
   hash() {
     return window.location.hash
   }
+
   add(route) {
     if (route.length) {
       route.forEach(route => this.routes.push(route))
@@ -21,7 +26,8 @@ class Router {
       this.routes.push(route)
     }
   }
-  navigate(hash = this.hash()) {
+
+  get(hash) {
     const params = hash.split('/')
     let route, param
 
@@ -34,15 +40,21 @@ class Router {
       param = null
     }
 
-    if (!route) {
+    return {route, param}
+  }
+
+  navigate(hash = this.hash()) {
+    const req = this.get(hash)
+
+    if (!req.route) {
       return this.render.error('404', 'Page not found')
     }
-    if (param !== null && param.indexOf('-') === -1) {
+    if (req.param !== null && req.param.indexOf('-') === -1) {
       return this.render.error('401', 'Check if painting ID is valid. All ID\'s consist of letters, numbers and hyphens.')
     }
     return this.render.template({ // if route is found, render correct component
-      temp: route.temp(param),
-      callback: route.callback
+      temp: req.route.temp(req.param),
+      callback: req.route.callback
     })
   }
 }

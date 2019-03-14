@@ -1,5 +1,5 @@
-import Component from '../component.js'
-import DetailBody from '../components/detailbody.js'
+import Component from '../component.mjs'
+import DetailBody from '../components/detailbody.mjs'
 
 class Detail extends Component {
   constructor(props) {

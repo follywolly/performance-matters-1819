@@ -12,13 +12,8 @@ class Render {
       temp: new App()
     }
 
-    this.dom.update(
-      this.app.temp
-    )
-    // this.app.el.appendChild( // build initial component 'App'
-    //   this.dom.create(
-    //     this.app.temp.preBuild()
-    //   )
+    // this.dom.update(
+    //   this.app.temp
     // )
 
     this.container = document.querySelector('#router-view') // init router-view element
