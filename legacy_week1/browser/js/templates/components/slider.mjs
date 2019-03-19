@@ -1,5 +1,5 @@
-import Component from '../component.js'
-import request from '../../modules/data.js'
+import Component from '../component.mjs'
+import request from '../../modules/data.mjs'
 
 class Slider extends Component {
   constructor(props) {
@@ -32,10 +32,22 @@ class Slider extends Component {
       this.slider()
     }
   }
+  async serverData() {
+    let data = []
+    try {
+      data = await request('Overview', {'adjacent': '&ps=6', 'lang': 'en'}, false)
+      this.loading(false)
+      this.store.setState({paintings: data})
+      this.store.commit('filter')
+    } catch (e) {
+      console.error(e)
+    }
+    return data
+  }
   async getData(local) {
     const language = this.store.getState('lang')
     try {
-      const data = await request('Overview', {'adjacent': '&ps=3', 'lang': language}, local)
+      const data = await request('Overview', {'adjacent': '&ps=9', 'lang': language}, local)
       this.store.setState({paintings: data})
       this.loading(false)
       this.store.commit('filter')

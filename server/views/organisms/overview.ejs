@@ -1,0 +1,29 @@
+<form class="search-holder" id="search-form" action="index.html" method="post">
+  <label for="search-input" class="hide">Find your art object</label>
+  <input type="text" name="search-input" id="search-input" value="" placeholder="Search here...">
+</form>
+
+<div id="slider-holder">
+  <div class="paintingsholder" id="paintingsholder">
+    <% store.slices.forEach((slice, index) => { %>
+      <div class="painting-group <% if (index === 0) { %>active<% } %>">
+        <% slice.forEach(painting => { %>
+          <div class="painting">
+            <a href="/paintings/<%= painting.number %>">
+              <figure>
+                <img src="<%= painting.headerSrc %>" alt="Image of <%= painting.title %>">
+                <figcaption>
+                  <h3><%= painting.title %></h3>
+                  <p><%= painting.maker %></p>
+                </figcaption>
+              </figure>
+            </a>
+          </div>
+        <% }) %>
+      </div>
+    <% }) %>
+
+  </div>
+  <button type="button" name="button" id="slider-button">Next three...</button>
+
+</div>

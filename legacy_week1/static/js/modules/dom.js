@@ -44,6 +44,7 @@ class DOM {
     parent.innerHTML = ''
     parent.appendChild(this.create(node))
 
+    // Since the create function is recursive, this settimeout makes sure that a component's mounted function fires only when it's rendered to the dom already
     setTimeout(() => comp.mounted(), 0)
   }
 }

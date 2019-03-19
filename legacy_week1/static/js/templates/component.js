@@ -1,35 +1,39 @@
-import DOM from '../modules/dom.mjs'
-import Helper from '../modules/helper.mjs'
-import store from '../store.mjs'
+import DOM from '../modules/dom.js'
+import Helper from '../modules/helper.js'
+// import store from '../store.js'
 
 class Component {
   constructor(props){
     this.domHandler = new DOM()
     this.helper = new Helper()
-    this.store = store
+    this.store = window.store
     this.props = props
     this.state = {}
     // this.id = this.store.unId
     // this.store.commit('updateID') // increment unique id for every instance of components
     this.isLoading = false // default no loading state
   }
+  watchers() {
+    return undefined
+  }
+  update() {
+    // makes sure update of the component happens after all queued functions in the callstack to make sure its designated parent exists
+    setTimeout(() => this.domHandler.update(this), 0)
+  }
   setState(state) {
     this.state = Object.assign({}, this.state, state)
-    this.domHandler.update(this) // update the component when state changes
+    this.update() // update the component when state changes
   }
   loading(bool){
     this.isLoading = bool
     if (bool === true) {
-      this.domHandler.update(this)
+      this.update()
     }
   }
   serverData() {
     return new Promise(resolve => resolve(undefined))
   }
-  onSSR() {
-    return ''
-  }
-  preBuild(data) {
+  preBuild(data = undefined) {
     let node
     if (!data) {
       if (this.isLoading) {

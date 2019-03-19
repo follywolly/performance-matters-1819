@@ -1,0 +1,22 @@
+<div class="painting detail">
+  <a href="/" class="btn">Return</a>
+  <div class="painting-body">
+    <figure>
+      <img src="<%= painting.src %>" alt="<%= painting.longTitle %> - Rijksmuseum Collection">
+      <figcaption>
+        <%= painting.longTitle %> - Rijksmseum Collection
+      </figcaption>
+    </figure>
+    <h3><%= painting.title %></h3>
+    <p><%= painting.makerLine %></p>
+    <p><%= painting.description %></p>
+    <p><%= painting.maker %></p>
+    <div class="color-blocks-holder">
+      <% painting.colors.forEach(color => { %>
+        <div class="color-block" style="background-color: <%= color %>">
+          <%= color %>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+</div>

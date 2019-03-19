@@ -5,6 +5,7 @@ import path from 'path'
 import App from '../browser/js/app.mjs'
 import Overview from '../browser/js/templates/pages/overview.mjs'
 import Detail from '../browser/js/templates/pages/detail.mjs'
+import store from '../browser/js/store.mjs'
 
 const __dirname = path.resolve(path.dirname(''))
 
@@ -25,7 +26,18 @@ const render = async (req, res, template, param) => {
   const inner = await toHTML(temp.preBuild(), true)
 
   const doc = `${head}router-view">${inner.html}${tail}`
-  // const cbs = inner.cbs.join('')
+
+  const cbs = inner.cbs
+    .filter(cb => cb !== 'undefined')
+    .map(cb => {
+      const index = cb.indexOf(')')
+      const tail = `(that => ${cb.slice(index + 1).trim().replace('this', 'that')})(window);`
+      return tail
+    })
+    .join('')
+    .trim()
+
+  const initState = store.state ? JSON.stringify(store.state) : 'undefined'
 
   res.set('Content-Type', 'text/html');
   res.end(`
@@ -41,6 +53,12 @@ const render = async (req, res, template, param) => {
         <div id="root">
           ${doc}
         </div>
+        <script>
+          window._SERVER_STATE_ = ${initState}
+        </script>
+        <script type="module">
+          ${cbs}
+        </script>
         <script type="module" src="/js/index.js"></script>
       </body>
     </html>`)

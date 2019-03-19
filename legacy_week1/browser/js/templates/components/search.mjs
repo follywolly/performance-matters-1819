@@ -20,8 +20,9 @@ class Search extends Component {
   }
   search(){
     const input = document.querySelector('#search-input')
+    console.log('search() from server')
     input.addEventListener('input', () => {
-        this.store.setState({query: input.value.toLowerCase()})
+      this.store.setState({query: input.value.toLowerCase()})
     })
   }
 

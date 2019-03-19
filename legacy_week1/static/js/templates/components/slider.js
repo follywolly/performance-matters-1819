@@ -1,5 +1,5 @@
-import Component from '../component.mjs'
-import request from '../../modules/data.mjs'
+import Component from '../component.js'
+import request from '../../modules/data.js'
 
 class Slider extends Component {
   constructor(props) {
@@ -10,14 +10,6 @@ class Slider extends Component {
     this.loading(true)
   }
   mounted() {
-    if (this.state.data.length > 0) {
-      this.loading(false)
-    }
-
-    if (this.isLoading && !this.langChange) {
-      this.getData(true)
-    }
-
     this.store.watch('filtered', (data) => {
       this.setState({data})
     }, this.id)
@@ -28,24 +20,22 @@ class Slider extends Component {
       this.getData(false)
     }, this.id)
 
+    if (this.state.data.length > 0) {
+      this.loading(false)
+    }
+
+    if (this.isLoading && !this.langChange) {
+      this.getData(true)
+    }
+
     if (!this.isLoading) {
       this.slider()
     }
   }
-  async serverData() {
-    let data = []
-    try {
-      data = await request('Overview', {'adjacent': '&ps=6', 'lang': 'en'}, false)
-      this.loading(false)
-    } catch (e) {
-      console.error(e)
-    }
-    return data
-  }
   async getData(local) {
     const language = this.store.getState('lang')
     try {
-      const data = await request('Overview', {'adjacent': '&ps=9', 'lang': language}, local)
+      const data = await request('Overview', {'adjacent': '&ps=3', 'lang': language}, local)
       this.store.setState({paintings: data})
       this.loading(false)
       this.store.commit('filter')

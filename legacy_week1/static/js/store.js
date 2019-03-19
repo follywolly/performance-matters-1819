@@ -4,12 +4,12 @@ import Store from './modules/store.js'
 
 const store = new Store()
 
-store.setState({
-  lang: 'en',
-  query: '',
-  filtered: []
-})
-
+// store.setState({
+//   lang: 'en',
+//   query: '',
+//   filtered: []
+// })
+//
 store.filter = () => {
   const paintings = store.state.paintings
   const query = store.state.query
@@ -22,6 +22,7 @@ store.filter = () => {
   store.setState({filtered})
 }
 store.watch('query', () => {
+  console.log('query changed')
   store.commit('filter')
 })
 

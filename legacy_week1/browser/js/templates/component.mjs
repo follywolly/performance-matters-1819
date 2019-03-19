@@ -1,6 +1,6 @@
-import DOM from '../modules/dom.js'
-import Helper from '../modules/helper.js'
-import store from '../store.js'
+import DOM from '../modules/dom.mjs'
+import Helper from '../modules/helper.mjs'
+import store from '../store.mjs'
 
 class Component {
   constructor(props){
@@ -26,7 +26,10 @@ class Component {
   serverData() {
     return new Promise(resolve => resolve(undefined))
   }
-  preBuild(data = undefined) {
+  onSSR() {
+    return 'undefined'
+  }
+  preBuild(data) {
     let node
     if (!data) {
       if (this.isLoading) {

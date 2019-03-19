@@ -1,6 +1,14 @@
+import Helper from './helper.js'
+
 class Store {
   constructor() {
-    this.state = {}
+    this.helper = new Helper()
+    window.store = this
+    if (typeof window._SERVER_STATE_ !== 'undefined' && this.helper.isObject(window._SERVER_STATE_)) {
+      this.state = window._SERVER_STATE_
+    } else {
+      this.state = {}
+    }
     this.unId = 0
     this.cbs = []
   }

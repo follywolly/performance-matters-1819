@@ -1,5 +1,8 @@
 class Helper {
   constructor() {}
+  isObject (value) {
+    return value && typeof value === 'object' && value.constructor === Object;
+  }
   chunk(array, size = 3) {
       let length = array == null ? 0 : array.length;
       if (!length) {

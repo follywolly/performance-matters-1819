@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon --experimental-modules server"
+    "start": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -18,12 +18,12 @@
   },
   "homepage": "https://github.com/follywolly/performance-matters-1819#readme",
   "dependencies": {
+    "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "node-fetch": "^2.3.0",
-    "vdom-to-html": "^2.3.1",
-    "virtual-dom": "^2.1.1"
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "dotenv": "^7.0.0",
     "nodemon": "^1.18.10"
   }
 }

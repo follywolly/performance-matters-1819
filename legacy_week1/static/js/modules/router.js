@@ -10,6 +10,7 @@ class Router {
     // } else {
     //   this.navigate(window.location.hash)
     // }
+    console.log(routes);
 
     window.addEventListener('hashchange', () => {
       this.navigate(this.hash())

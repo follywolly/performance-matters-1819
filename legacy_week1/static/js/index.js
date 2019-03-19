@@ -1,6 +1,7 @@
 'use strict'
 
 // modules
+import store from './store.js'
 import Router from './modules/router.js'
 
 import Detail from './templates/pages/detail.js'
