@@ -2,6 +2,16 @@
     <p>Made with <a href="https://www.rijksmuseum.nl/nl/api" target="_blank">the Rijksmseum API</a>.</p>
   </footer>
   <script type="text/javascript">
+    if ("serviceWorker" in navigator) {
+      if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker
+          .register("/sw.js", {
+            scope: "./"
+          })
+      }
+    }
+  </script>
+  <script type="text/javascript">
     window.$store = <%- JSON.stringify(store) %>
   </script>
   <script type="text/javascript" src="/js/main.min.js">

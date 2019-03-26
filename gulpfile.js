@@ -48,7 +48,7 @@ gulp.task('js',
     }
 )
 
-gulp.task('brotli',
+gulp.task('brotli-js',
   () => {
     return gulp.src('server/static/js/*.js')
       .pipe(brotli.compress({
@@ -61,11 +61,32 @@ gulp.task('brotli',
       .pipe(gulp.dest('server/static/js'))
   }
 )
+gulp.task('brotli-css',
+  () => {
+    return gulp.src('server/static/css/*.css')
+      .pipe(brotli.compress({
+        extension: 'brotli',
+        skipLarger: true,
+        mode: 0,
+        quality: 11,
+        lgblock: 0
+      }))
+      .pipe(gulp.dest('server/static/css'))
+  }
+)
 
-gulp.task('gzip',
+gulp.task('gzip-js',
   () => {
     return gulp.src('server/static/js/*.js')
       .pipe(gzip())
       .pipe(gulp.dest('server/static/js'))
+  }
+)
+
+gulp.task('gzip-css',
+  () => {
+    return gulp.src('server/static/css/*.css')
+      .pipe(gzip())
+      .pipe(gulp.dest('server/static/css'))
   }
 )

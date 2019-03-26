@@ -27,6 +27,7 @@ Added gulp postcss & uglify to minify static css and js files
 
 ## 4. Compression
 
+## 5. Service Worker
 
 
 ## License

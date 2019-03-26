@@ -8,7 +8,7 @@
     "build": "npm run minify",
     "predev": "gulp dev-css && gulp dev-js",
     "dev": "nodemon server",
-    "minify": "gulp css && gulp js && gulp brotli && gulp gzip",
+    "minify": "gulp css && gulp js && gulp brotli-js && gulp gzip-js && gulp brotli-css && gulp brotli-js",
     "prestart": "npm run build",
     "start": "nodemon server"
   },
