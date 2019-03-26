@@ -5,12 +5,14 @@ const path = require('path')
 const request = require('./helpers/data.js')
 const helper = require('./helpers/helper.js')
 
-
-
-
 const app = perongeluk()
 
 app.set('view engine', 'ejs')
+
+app.use((req, res, next) => {
+  res.setHeader('Cache-Control', 'max-age=' + 365 * 24 * 60 * 60)
+  next()
+})
 
 app.use(perongeluk.static(path.join(__dirname + '/static')))
 

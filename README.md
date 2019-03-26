@@ -17,21 +17,17 @@ npm install
 # Start liveserver
 npm run server
 ```
+## 1. SSR
+Rewrote project to server side rendered pages
 
-## Thoughts
-Clientside components & serverside components -> how to make them both work with just one version of the components?
-require !== import -> Is there a fix?
-Build process? take clientside components and rebuild them to require and module.exports to server components
-```js
-if (module) {
-  module.exports = foo
-} else {
-  export default foo
-}
-```
+## 2. Minifying
+Added gulp postcss & uglify to minify static css and js files
 
-some components require callback functions to function properly. How to send callback functions for class references that get created on the server to the client?
-Make store a global? that way you don't need class references
+## 3. Caching
+
+## 4. Compression
+
+
 
 ## License
 [MIT](LICENSE) @ [Folkert-Jan van der Pol](https://folkertjan.nl)
