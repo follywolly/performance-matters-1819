@@ -20,7 +20,7 @@
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "node-fetch": "^2.3.0",
-    "dotenv": "^7.0.0",
+    "dotenv": "^7.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
