@@ -1,5 +1,3 @@
-// require('dotenv').config()
-
 const perongeluk = require('express')
 const path = require('path')
 const request = require('./helpers/data.js')
