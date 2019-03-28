@@ -3,10 +3,13 @@
   </footer>
   <script type="text/javascript">
     if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("/sw.js", {
-          scope: "./"
-        })
+      if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker
+          .register("/sw.js", {
+            scope: "./"
+          })
+      }
+
     }
   </script>
   <script type="text/javascript">

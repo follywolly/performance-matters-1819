@@ -9,10 +9,10 @@ const app = perongeluk()
 
 app.set('view engine', 'ejs')
 
-app.use((req, res, next) => {
-  res.setHeader('Cache-Control', 'max-age=' + 365 * 24 * 60 * 60)
-  next()
-})
+// app.use((req, res, next) => {
+//   res.setHeader('Cache-Control', 'max-age=' + 365 * 24 * 60 * 60)
+//   next()
+// })
 
 app.use(perongeluk.static(path.join(__dirname + '/static')))
 

@@ -5,17 +5,17 @@ self.addEventListener('install', e => {
   e.waitUntil(precache())
 })
 
-self.addEventListener('fetch', e => {
+self.addEventListener('fetch', async e => {
   const request = e.request
   e.respondWith(caches
     .open(CACHE)
     .then(cache => cache.match(request))
     .then(res => {
       if (res) {
-        console.log('got item from cache');
+        // get from cache
         return res
       } else {
-        console.log('got item from server');
+        // get from server
         return fetch(request)
           .then(response => caches
             .open(CACHE)
@@ -31,14 +31,25 @@ self.addEventListener('fetch', e => {
       }
     })
   )
+
+  e.waitUntil(update(e.request))
 })
 
 function precache() {
   return caches.open(CACHE)
     .then(cache => cache
       .addAll([
-        '/'
+        '/',
+        '/offline'
       ])
     )
     .then(() => self.skipWaiting())
+}
+
+function update(request) {
+  return caches.open(CACHE)
+    .then(cache => fetch(request)
+      .then(response => cache.put(request, response))
+    )
+    .catch(console.error)
 }
