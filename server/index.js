@@ -1,4 +1,4 @@
-require('dotenv').config()
+// require('dotenv').config()
 
 const perongeluk = require('express')
 const path = require('path')
