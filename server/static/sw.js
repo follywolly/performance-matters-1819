@@ -1,13 +1,11 @@
-var CACHE = 'network-or-cache';
+var CACHE = 'core-cache';
 
 self.addEventListener('install', e => {
-  console.log('Service worker is being installed');
-
+  console.log('Service worker is installed');
   e.waitUntil(precache())
 })
 
 self.addEventListener('fetch', e => {
-  console.log('Service worker is called because a fetch request was send');
   const request = e.request
   e.respondWith(caches
     .open(CACHE)
@@ -24,6 +22,12 @@ self.addEventListener('fetch', e => {
             .then(cache => cache.put(request, response.clone()))
             .then(() => response)
           )
+          .catch(err => caches
+            .open(CACHE)
+            .then(cache => cache.match('/offline')
+              .then(res => res)
+            )
+          )
       }
     })
   )
@@ -36,4 +40,5 @@ function precache() {
         '/'
       ])
     )
+    .then(() => self.skipWaiting())
 }

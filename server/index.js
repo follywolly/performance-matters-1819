@@ -27,6 +27,12 @@ app.get('/', async (req, res) => {
   })
 })
 
+app.get('/offline', (req, res) => {
+  res.render(path.join(__dirname + '/views/pages/offline'), {
+    store
+  })
+})
+
 app.get('/paintings/:id', async (req, res) => {
   const data = await request(req.params.id, {'insert': `/${req.params.id}`, 'lang': 'en'}, false)
   res.render(path.join(__dirname + '/views/pages/detail'), {
