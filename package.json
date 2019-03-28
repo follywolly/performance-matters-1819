@@ -4,7 +4,13 @@
   "description": "In dit vak gaan we de eerder bij de OBA gemaakte client side web applicatie ombouwen naar een server side gerenderde applicatie. Verder gaan we een reeks van optimalisaties doorvoeren om de performance van de applicatie te verbeteren. Uiteindelijk zorgen we ervoor dat de applicatie offline beschikbaar.",
   "main": "server/index.js",
   "scripts": {
-    "start": "node server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run minify",
+    "predev": "gulp dev-css && gulp dev-js",
+    "dev": "nodemon server",
+    "minify": "gulp css && gulp js && gulp brotli-js && gulp gzip-js && gulp brotli-css && gulp brotli-js",
+    "prestart": "npm run build",
+    "start": "nodemon server"
   },
   "repository": {
     "type": "git",
@@ -19,10 +25,10 @@
   "dependencies": {
     "ejs": "^2.6.1",
     "express": "^4.16.4",
-    "node-fetch": "^2.3.0",
-    "dotenv": "^7.0.0"
+    "node-fetch": "^2.3.0"
   },
   "devDependencies": {
+    "dotenv": "^7.0.0",
     "@babel/core": "^7.4.0",
     "@babel/preset-env": "^7.4.2",
     "cssnano": "^4.1.10",
